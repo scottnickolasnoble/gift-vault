@@ -30,7 +30,7 @@ ideaList.addEventListener("change",function(event){
 	idea.status = newStatus;
 	
 	saveIdeas(allIdeas);
-	renderIdeas(loadIdeas());
+	renderIdeas(loadIdeas(), loadPerson());
 	
 })
 
