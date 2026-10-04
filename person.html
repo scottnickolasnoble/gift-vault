@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Person</title>
+		
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<main>
+			<div class="top-bar">
+				<a href="index.html" class="back-link">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left preview-icon"><path d="m15 18-6-6 6-6"/></svg>
+				</a>
+				<button type="button" class="edit-button" id="person-edit-button">Edit</button>
+			</div>
+			<header class="person-header" id="person-header">
+				<span class="person-initial avatar-large" id="person-avatar"></span>
+					<div class="person-name-relationship">
+						<h1 id="person-name"></h1>
+						<span id="person-details"></span>
+					</div>
+			</header>
+			<section class="ideas-section">
+				<div class="section-header">
+					<h2 id="idea-header">Ideas</h2>
+					<a href="idea-form.html" id="add-idea-link">+ Add idea</a>
+				</div>
+				<div id="ideas-list">
+					
+				</div>
+				<p class="ideas-empty" hidden id="ideas-empty">No ideas yet for this person</p>
+			</section>
+		</main>
+	<script src="js/storage.js"></script>
+	<script src="js/dates.js"></script>
+	<script src="js/person.js"></script>
+	</body>
+	
+</html>

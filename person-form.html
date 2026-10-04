@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Add Person</title>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<main>
+			<header>
+				<a class="cancel-link" id="cancel-link">Cancel</a>
+				<h1 class="add-person-label" id="person-label">New Person</h1>
+				<span class="header-spacer"></span>
+			</header>
+			<form class="add-person-form">
+			<div class="avatar-preview" id="avatar-preview">
+				
+			</div>
+			<label class="field">
+				<span class="field-label">Name</span>
+				<input class="field-input" type="text" name="name" required>
+			</label>
+			<label class="field">
+				<span class="field-label">Relationship <span class="field-label-optional">(optional)</span></span>
+				<input class="field-input" type="text" name="relationship" placeholder="e.g. Sister, Friend, Coworker">
+			</label>
+			<label class="field">
+				<span class="field-label">Group</span>
+				<div class="add-person-buttons">
+					<label class="add-person-chip person-chip-active">
+						<input type="radio" name="group" value="family" checked>
+						<span>Family</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="friends">
+						<span>Friends</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="work">
+						<span>Work</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="other">
+						<span>Other</span>
+					</label>
+			</div>
+			<span class="birthday-label">Used by the filter chips on the People list</span>
+			</label>
+			<label class="field">
+				<span class="field-label">Birthday<span class="field-label-optional"> (optional)</span></span>
+				<input class="field-input" type="date" name="birthday">
+				<span class="birthday-label">Used for countdowns and reminders</span>
+			</label>
+			<button class="save-person" type="submit" id="save-button">Save person</button>
+			</form>
+			<button type="button" id="delete-button" hidden="true">Delete Person</button>
+			<dialog id="delete-dialog">
+				<h2>Delete this person?</h2>
+				<p>Their ideas will be deleted too. This cannot be undone.</p>
+				<div class="delete-button-row">
+					<button type="button" id="keep-button">Keep</button>
+					<button type="button" id="confirm-delete">Delete</button>
+				</div>
+			</dialog>
+		</main>
+	<script src="js/storage.js"></script>
+	<script src="js/dates.js"></script>
+	<script src="js/person-form.js"></script>
+	</body>
+	
+</html>

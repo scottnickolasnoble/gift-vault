@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Add Idea</title>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<main>
+			<header>
+				<a class="cancel-link" id="cancel-link" href="index.html">Cancel</a>
+				<h1 class="add-person-label" id="idea-form-title">New Idea</h1>
+				<span class="header-spacer"></span>
+			</header>
+			<form class="add-person-form">
+			<label class="field">
+				<span class="field-label">What's the gift?</span>
+				<input class="field-input" type="text" name="name" required>
+			</label>
+			<label class="field">
+				<span class="field-label">How did it come up?<span class="field-label-optional"> (optional)</span></span>
+				<textarea rows="3" class="field-input" name="note"></textarea>
+			</label>
+			<div class="field-row">
+				<label class="field">
+					<span class="field-label">Date heard<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="date" name="heardOn">
+				</label>
+				<label class="field">
+					<span class="field-label">Est. price<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="number" min="0" step="0.01" name="price">
+				</label>
+			</div>
+			<label class="field">
+				<span class="field-label">Link<span class="field-label-optional"> (optional)</span></span>
+				<input class="field-input" type ="url" name="link" placeholder="https://....">
+			<button class="save-person" type="submit" id="save-button">Save Idea</button>
+			</form>
+			<button type="button" id="delete-button" hidden="true">Delete Idea</button>
+			<dialog id="delete-dialog">
+				<h2>Delete this Idea?</h2>
+				<p>This cannot be undone.</p>
+				<div class="delete-button-row">
+					<button type="button" id="keep-button">Keep</button>
+					<button type="button" id="confirm-delete">Delete</button>
+				</div>
+			</dialog>
+		</main>
+	<script src="js/storage.js"></script>
+	<script src="js/dates.js"></script>
+	<script src="js/idea-form.js"></script>
+	</body>
+	
+</html>
