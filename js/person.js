@@ -8,8 +8,8 @@ const ideaList = document.querySelector("#ideas-list");
 const ideaEmpty = document.querySelector("#ideas-empty");
 const statuses = ["Idea","Bought","Wrapped","Given"];
 const editButton = document.querySelector("#person-edit-button");
-const personDetailsDiv = document.querySelector(".person-name-relationship");
-
+const detailListId = document.querySelector("#details-list");
+const detailCard = document.querySelector("#details-card");
 editButton.addEventListener("click",function(event){
 	window.location.href = `person-form.html?id=${personId}`;
 });
@@ -53,9 +53,9 @@ function loadPerson(){
 function renderPerson(personInfo){
 	const days = personInfo.birthday ? daysUntil(personInfo.birthday) : null;
 	const label = birthdayLabel(personInfo.birthday);
-	const isSoon = days !== null & days <= 30;
+	const isSoon = days !== null && days <= 30;
 			
-	const detailsText = !isSoon && label ? `${personInfo.relationship} &middot; ${label}` : personInfo.relationship;
+	
 	const pillHTML = isSoon
 	? 		`<span class="birthday-pill ${days === 0 ? "birthday-pill-today" : `avatar-${personInfo.colour}`}">${label}</span>`
 	: 		"";
@@ -70,9 +70,45 @@ function renderPerson(personInfo){
 	addIdeaLabel.href = `idea-form.html?personId=${personId}`;
 }
 
+function renderDetails(person){
+	detailCard.hidden = true;
+	const detailList = [{
+		label: "Sizes",
+		value: person.sizes || ""
+	},
+	{
+		label: "Favourite Colour",
+		value: person.favColour || ""
+	},
+	{
+		label: "Loves",
+		value: person.loves || ""
+	},
+	{
+		label: "Avoid",
+		value: person.avoid || ""
+	}];
+	
+	const filteredDetailList = detailList.filter(function(list){
+		return list.value;
+	});
+	
+	if(filteredDetailList.length === 0){
+		return;
+	}
+	
+	const detailOutput = filteredDetailList.map(function(list){
+		return `<div class="detail-item">
+		<dt>${list.label}</dt>
+		<dd>${list.value}</dd>
+		</div>`
+	}).join("");
+	detailCard.hidden = false;
+	detailListId.innerHTML = detailOutput;
+}
+
 function renderIdeas(personIdeas,person){
 	ideaList.innerHTML = "";
-	console.log(person);
 	if(personIdeas.length === 0){
 			ideaEmpty.hidden = false;
 			return;
@@ -103,9 +139,10 @@ function renderIdeas(personIdeas,person){
 
 function init(){
 	const person = loadPerson();
-	const ideas = loadAllIdeas();
+	const ideas = loadIdeas();
 	renderPerson(person);
 	renderIdeas(ideas,person);
+	renderDetails(person);
 	
 }
 

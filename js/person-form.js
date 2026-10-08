@@ -20,6 +20,11 @@ formInfo.addEventListener('submit', function(event){
 	const relationship = formInfo.elements.relationship.value;
 	const birthday = formInfo.elements.birthday.value;
 	const group = formInfo.elements.group.value;
+	const sizes = formInfo.elements.sizes.value;
+	const favColour = formInfo.elements.favColour.value;
+	const loves = formInfo.elements.loves.value;
+	const avoid = formInfo.elements.avoid.value;
+	
 	
 	if(!personId){
 		const person = {
@@ -28,7 +33,11 @@ formInfo.addEventListener('submit', function(event){
 			relationship,
 			birthday,
 			colour: colours[people.length%colours.length],
-			group
+			group,
+			sizes,
+			favColour,
+			loves,
+			avoid
 			};
 			
 	
@@ -46,6 +55,10 @@ formInfo.addEventListener('submit', function(event){
 	person.relationship = relationship;
 	person.birthday = birthday;
 	person.group = group;
+	person.sizes = sizes;
+	person.favColour = favColour;
+	person.loves = loves;
+	person.avoid = avoid;
 	savePeople(people);
 	window.location.href = `person.html?id=${personId}`;
 	return;
@@ -88,6 +101,10 @@ function setUpEditMode(id){
 	formInfo.elements.relationship.value = `${person.relationship}`;
 	formInfo.elements.birthday.value = person.birthday;
 	formInfo.elements.group.value = person.group;
+	formInfo.elements.sizes.value = person.sizes;
+	formInfo.elements.loves.value = person.loves;
+	formInfo.elements.favColour.value = person.favColour;
+	formInfo.elements.avoid.value = person.avoid;
 }
 
 function init(){

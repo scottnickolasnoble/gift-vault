@@ -1,5 +1,17 @@
 function formatMonthDay(dateString){
-	const [year, month, day] = dateString.split("-").map(Number);
+	let month;
+	let day;
+	
+	const parts = dateString.split("-").map(Number);
+	
+	if (parts.length === 3){
+		month = parts[1];
+		day = parts[2];
+	} else {
+		month = parts[0];
+		day = parts[1];
+	}
+	
 	const date = new Date()
 	const newDate = new Date(date.getFullYear(), month-1, day);
 	
@@ -25,7 +37,18 @@ function birthdayLabel(dateString){
 }
 
 function daysUntil(dateString){
-	const [year, month, day] = dateString.split("-").map(Number);
+	let month;
+	let day;
+	
+	const parts = dateString.split("-").map(Number);
+	
+	if (parts.length === 3){
+		month = parts[1];
+		day = parts[2];
+	} else {
+		month = parts[0];
+		day = parts[1];
+	}
 	
 	const now = new Date();
 	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

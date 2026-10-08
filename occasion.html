@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Occasion</title>
+		
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#F5F0E8">
+	<link rel="icon" type="image/png" href="icons/favicon-32.png">
+	<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-title" content="Gift Vault">
+	</head>
+	<body>
+		<main>
+			<div class="top-bar">
+				<a href="occasions.html" class="back-link">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left preview-icon"><path d="m15 18-6-6 6-6"/></svg>
+				</a>
+				<a class="edit-button" id="edit-occasion">Edit</a>
+			</div>
+			<header class="occasion-header">
+					<div class="date-box date-box-large" id="date-box-occasion">
+						<span class="date-month" id="occasion-month">Nov</span>
+						<span class="date-day" id="occasion-day">17</span>
+					</div>	
+					<div class="occasion-heading">
+						<h1 id="occasion-title"></h1>
+						<span class="occasion-when" id="occasion-when"></span>
+						<span class="occasion-pill" id="occasion-pill"></span>
+					</div>
+			</header>
+			
+			<dl class="occasion-stats">
+				<div class="stat">
+					<dt>Budget</dt>
+					<dd id="stat-budget"></dd>
+				</div>
+				<div class="stat">
+					<dt>Spent</dt>
+					<dd id="stat-spent"></dd>
+				</div>
+			</dl>
+			
+			<section class="occasion-people-section">
+				<div class="section-header">
+					<h2 id="people-heading"></h2>
+					<button type="button" id="add-people-link">+ Add people</button>
+				</div>
+				<ul class="occasion-people" id="occasion-people"></ul>
+			</section>
+			
+			<button type="button" id="delete-button">Delete Occasion</button>
+			<dialog id="delete-dialog">
+				<h2>Delete this Occasion?</h2>
+				<p>The people and their ideas will stay. This can't be undone.</p>
+				<div class="delete-button-row">
+					<button type="button" id="keep-button">Keep</button>
+					<button type="button" id="confirm-delete">Delete</button>
+				</div>
+			</dialog>
+			<dialog id="add-dialog" class="add-dialog">
+				<h2 id="add-title"></h2>
+					<p class="add-hint">Only people not already in it are shown</p>
+
+					<div class="add-list" id="add-list"></div>
+
+				<div class="add-footer">
+					<span class="add-count" id="add-count">0 selected</span>
+					<div class="dialog-buttons">
+						<button type="button" id="add-cancel">Cancel</button>
+						<button type="button" id="add-confirm" disabled>Add people</button>
+					</div>
+				</div>
+			</dialog>
+			<p class="occasion-footer" id="occasion-footer"></p>
+		</main>
+	<script src="js/storage.js"></script>
+	<script src="js/dates.js"></script>
+	<script src="js/pwa.js"></script>
+	<script src="js/occasion.js"></script>
+	</body>
+	
+</html>
+

@@ -15,3 +15,12 @@ function savePeople(people){
 function saveIdeas(ideas){
 	localStorage.setItem("ideas",JSON.stringify(ideas));
 }
+
+function loadOccasions(){
+	const occasions = JSON.parse(localStorage.getItem("occasions")) || [];
+	return occasions;
+}
+
+function saveOccasions(occasions){
+	localStorage.setItem("occasions",JSON.stringify(occasions));
+}

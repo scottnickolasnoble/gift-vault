@@ -53,11 +53,32 @@
 			</div>
 			<span class="birthday-label">Used by the filter chips on the People list</span>
 			</label>
-			<label class="field">
+			<div class="field">
 				<span class="field-label">Birthday<span class="field-label-optional"> (optional)</span></span>
 				<input class="field-input" type="date" name="birthday">
 				<span class="birthday-label">Used for countdowns and reminders</span>
-			</label>
+			</div>
+			<fieldset class="details-group">
+				<legend>
+				Details
+				</legend>
+				<label class="field">
+					<span class="field-label">Sizes<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="text" name="sizes">
+				</label>
+				<label class="field">
+					<span class="field-label">Favourite colour<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="text" name="favColour">
+				</label>
+				<label class="field">
+					<span class="field-label">Loves<span class="field-label-optional"> (optional)</span></span>
+					<textarea class="field-input" rows="2" name="loves"></textarea>
+				</label>
+				<label class="field">
+					<span class="field-label">Avoid<span class="field-label-optional"> (optional)</span></span>
+					<textarea class="field-input" rows="2" name="avoid"></textarea>
+				</label>
+			</fieldset>
 			<button class="save-person" type="submit" id="save-button">Save person</button>
 			</form>
 			<button type="button" id="delete-button" hidden="true">Delete Person</button>
