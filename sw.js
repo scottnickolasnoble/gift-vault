@@ -23,7 +23,14 @@ const FILES = [
 	"./js/settings.js",
 	"./icons/icon-192.png",
 	"./icons/icon-512.png",
-	"./icons/apple-touch-icon.png"
+	"./icons/apple-touch-icon.png",
+	"./occasions.html",
+	"./occasion-form.html",
+	"./occasion.html",
+	"./js/occasions.js",
+	"./js/occasion-form.js",
+	"./js/occasion.js",
+	"./js/dates.js"
 ];
 
 // Install: save a copy of every file.
