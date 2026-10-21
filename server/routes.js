@@ -49,6 +49,7 @@ function occasionOut(row, personIds) {
 		date: row.date,
 		budget: row.budget,
 		type: row.type,
+		builtin: row.builtin,
 		personIds: personIds || []
 	};
 }
@@ -118,6 +119,38 @@ async function setOccasionPeople(client, occasionId, personIds) {
 	}
 }
 
+// Every account has one built-in Christmas (Dec 25, a group, no people to start).
+// If the user already made their own "Christmas" on Dec 25, that one becomes the built-in one.
+async function ensureChristmas(client, userId) {
+	const has = await client.query("SELECT 1 FROM occasions WHERE user_id = $1 AND builtin", [userId]);
+	if (has.rows[0]) {
+		return;
+	}
+	try {
+		const own = await client.query(
+			`SELECT id FROM occasions
+			  WHERE user_id = $1 AND date = '12-25' AND lower(name) LIKE 'christmas%'
+			  ORDER BY created_at LIMIT 1`,
+			[userId]
+		);
+		if (own.rows[0]) {
+			await client.query("UPDATE occasions SET builtin = true, type = 'group' WHERE id = $1", [own.rows[0].id]);
+		} else {
+			await client.query(
+				`INSERT INTO occasions (user_id, name, date, budget, type, builtin)
+				 VALUES ($1, 'Christmas', '12-25', NULL, 'group', true)
+				 ON CONFLICT (user_id) WHERE builtin DO NOTHING`,
+				[userId]
+			);
+		}
+	} catch (error) {
+		// 23505 = another request made it at the same moment. That's fine.
+		if (error.code !== "23505") {
+			throw error;
+		}
+	}
+}
+
 function notFound(res, what) {
 	return res.status(404).json({ error: `That ${what} doesn't exist anymore.` });
 }
@@ -147,6 +180,7 @@ async function loadAll(userId) {
 }
 
 router.get("/data", async function(req, res) {
+	await ensureChristmas(db, req.user.id);
 	const data = await loadAll(req.user.id);
 	data.user = { id: req.user.id, name: req.user.name, email: req.user.email };
 	res.json(data);
@@ -308,10 +342,13 @@ router.put("/occasions/:id", async function(req, res) {
 		if (!occasion) {
 			return null;
 		}
-		if ("name" in body) occasion.name = v.requiredText(body.name, "The occasion's name", 80);
-		if ("date" in body) occasion.date = v.monthDay(body.date);
+		// Christmas keeps its name, date and group type; only its budget and people change.
+		if (!occasion.builtin) {
+			if ("name" in body) occasion.name = v.requiredText(body.name, "The occasion's name", 80);
+			if ("date" in body) occasion.date = v.monthDay(body.date);
+			if ("type" in body) occasion.type = v.oneOf(body.type, ["person", "group"], occasion.type);
+		}
 		if ("budget" in body) occasion.budget = v.money(body.budget);
-		if ("type" in body) occasion.type = v.oneOf(body.type, ["person", "group"], occasion.type);
 
 		const updated = await client.query(
 			"UPDATE occasions SET name = $3, date = $4, budget = $5, type = $6 WHERE id = $1 AND user_id = $2 RETURNING *",
@@ -339,8 +376,12 @@ router.delete("/occasions/:id", async function(req, res) {
 	if (!v.isUuid(req.params.id)) {
 		return notFound(res, "occasion");
 	}
+	const found = await db.query("SELECT builtin FROM occasions WHERE id = $1 AND user_id = $2", [req.params.id, req.user.id]);
+	if (found.rows[0] && found.rows[0].builtin) {
+		throw new v.BadRequest("Christmas is built in, so it can't be deleted. You can take everyone out of it instead.");
+	}
 	const deleted = await db.transaction(async function(client) {
-		const result = await client.query("DELETE FROM occasions WHERE id = $1 AND user_id = $2", [req.params.id, req.user.id]);
+		const result = await client.query("DELETE FROM occasions WHERE id = $1 AND user_id = $2 AND NOT builtin", [req.params.id, req.user.id]);
 		if (result.rowCount === 0) {
 			return false;
 		}
@@ -397,7 +438,9 @@ router.post("/import", async function(req, res) {
 			const personIds = (Array.isArray(occasion.personIds) ? occasion.personIds : [])
 				.map(function(id) { return newPersonId[id]; })
 				.filter(Boolean);
-			if (personIds.length === 0) continue;
+			// Christmas can be empty (it's built in); any other occasion needs someone in it.
+			const isChristmas = occasion.builtin === true || (o.date === "12-25" && /^christmas/i.test(o.name));
+			if (personIds.length === 0 && !isChristmas) continue;
 			if (!occasion.type) {
 				o.type = personIds.length > 1 ? "group" : "person";
 			}
@@ -425,6 +468,8 @@ router.post("/import", async function(req, res) {
 			);
 			ideaCount++;
 		}
+
+		await ensureChristmas(client, userId);
 
 		return {
 			people: Object.keys(newPersonId).length,

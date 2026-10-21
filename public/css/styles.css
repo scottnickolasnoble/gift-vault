@@ -2108,3 +2108,43 @@ a {
 	color: #FFFFFF;
 	border: none;
 }
+
+/* ---------- V3.1: built-in Christmas ---------- */
+
+.empty-add {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 24px 20px;
+	background: #FFFFFF;
+	border: 1px dashed #D6CCBE;
+	border-radius: 18px;
+	text-align: center;
+}
+
+.empty-add p {
+	margin: 0;
+	color: #5E5650;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.empty-add .save-person {
+	margin: 0;
+}
+
+.builtin-note {
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: 12px;
+	background: #EDE6DB;
+	color: #3D3632;
+	font-size: 14px;
+	line-height: 1.45;
+}
+
+.field-input:disabled,
+.field-input[readonly] {
+	background: #F2ECE3;
+	color: #5E5650;
+}

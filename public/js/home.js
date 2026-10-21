@@ -54,6 +54,10 @@ function renderNext(entry, ideas){
 	const sortedCount = occasion.personIds.filter(function(personId){
 		return isSorted(personId, occasion.id, ideas);
 	}).length;
+	if(total === 0){
+		nextDetail.textContent = "Tap to add the people you're buying for";
+		return;
+	}
 	const parts = [];
 	if(entry.isGroup){
 		parts.push(`${sortedCount} of ${total} sorted`);

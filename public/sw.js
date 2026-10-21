@@ -3,7 +3,7 @@
 // files: pages open fast, and if there's no signal you see a friendly page
 // instead of the browser's error. It never stores your people or ideas.
 
-const CACHE = "gift-vault-v3-1";
+const CACHE = "gift-vault-v3-2";
 
 const FILES = [
 	"./home.html",

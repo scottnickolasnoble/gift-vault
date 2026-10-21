@@ -59,7 +59,9 @@ function buildEntries(people, occasions, ideas) {
 			kind: "occasion",
 			id: occasion.id,
 			title: occasion.name,
-			tag: isGroup ? `${occasion.personIds.length} ${occasion.personIds.length === 1 ? "person" : "people"}` : (person ? person.name : "No one"),
+			tag: occasion.personIds.length === 0 ? "Add people"
+				: isGroup ? `${occasion.personIds.length} ${occasion.personIds.length === 1 ? "person" : "people"}`
+				: (person ? person.name : "No one"),
 			date: occasion.date,
 			days: daysUntil(occasion.date),
 			detail: detail,

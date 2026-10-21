@@ -67,3 +67,7 @@ CREATE TABLE IF NOT EXISTS ideas (
 	created_at   timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS ideas_user_idx ON ideas(user_id);
+
+-- V3.1: Christmas is built in. Every account has exactly one, and it can't be deleted.
+ALTER TABLE occasions ADD COLUMN IF NOT EXISTS builtin boolean NOT NULL DEFAULT false;
+CREATE UNIQUE INDEX IF NOT EXISTS occasions_one_builtin_per_user ON occasions(user_id) WHERE builtin;

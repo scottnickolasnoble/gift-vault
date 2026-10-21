@@ -20,6 +20,9 @@ const countTodo = document.querySelector("#count-todo");
 const countDone = document.querySelector("#count-done");
 const occasionPeople = document.querySelector("#occasion-people");
 const filterEmpty = document.querySelector("#filter-empty");
+const emptyAdd = document.querySelector("#empty-add");
+const emptyAddText = document.querySelector("#empty-add-text");
+const emptyAddButton = document.querySelector("#empty-add-button");
 const addOccasionIdea = document.querySelector("#add-occasion-idea");
 const deleteButton = document.querySelector("#delete-button");
 const deleteDialog = document.querySelector("#delete-dialog");
@@ -52,7 +55,9 @@ function renderHeader(){
 	occasionMonth.textContent = month;
 	occasionDay.textContent = day;
 	occasionWhen.textContent = `${month} ${day} · ${inDaysText(days)}`;
-	occasionPill.textContent = isGroup ? "Group · repeats yearly" : "Repeats yearly";
+	occasionPill.textContent = filteredOccasion.builtin ? "Built in · every year" : isGroup ? "Group · repeats yearly" : "Repeats yearly";
+	// Christmas is built in, so it can't be deleted.
+	deleteButton.hidden = !!filteredOccasion.builtin;
 	dateBoxOccasion.classList.toggle("date-box-dark", isGroup);
 	occasionStats.classList.toggle("occasion-stats-dark", isGroup);
 	editOccasion.href = `occasion-form.html?id=${filteredOccasion.id}`;
@@ -154,12 +159,12 @@ function renderPeople(){
 		occasionPeople.insertAdjacentHTML("beforeend", cardHTML);
 	});
 
-	filterEmpty.hidden = shown.length > 0;
-	if(inOccasion.length === 0){
-		filterEmpty.textContent = "No one's in this occasion yet. Tap + Add people.";
-	} else {
-		filterEmpty.textContent = currentFilter === "done" ? "Nothing bought yet." : "Everyone's sorted.";
-	}
+	// Nobody in it yet (a fresh Christmas): a big "Add people" button instead of the list.
+	emptyAdd.hidden = inOccasion.length > 0;
+	emptyAddText.textContent = `No one's in ${filteredOccasion.name} yet. Add the people you're buying for.`;
+	planFilter.hidden = !isGroup || inOccasion.length === 0;
+	filterEmpty.hidden = shown.length > 0 || inOccasion.length === 0;
+	filterEmpty.textContent = currentFilter === "done" ? "Nothing bought yet." : "Everyone's sorted.";
 
 	// The "Add an idea" button picks the person when there's only one.
 	const personPart = !isGroup && inOccasion[0] ? `personId=${inOccasion[0].id}&` : "";
@@ -291,6 +296,10 @@ addConfirm.addEventListener("click", async function(){
 		renderPeople();
 		addDialog.close();
 	}
+});
+
+emptyAddButton.addEventListener("click", function(){
+	addPeopleLink.click();
 });
 
 addCancel.addEventListener("click", function(){

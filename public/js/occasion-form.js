@@ -29,7 +29,9 @@ occasionForm.addEventListener("submit", async function(event){
 		return tick.value;
 	});
 
-	if (personIds.length === 0 || !personIds[0]){
+	// Christmas (built in) is allowed to have no one in it.
+	const canBeEmpty = editing && editing.builtin;
+	if (!canBeEmpty && (personIds.length === 0 || !personIds[0])){
 		showMessage("Choose who the occasion is for.");
 		return;
 	}
@@ -153,6 +155,15 @@ function fillForm(occasion){
 	monthInput.value = String(month);
 	dayInput.value = String(day);
 	occasionForm.elements.budget.value = occasion.budget === null ? "" : occasion.budget;
+
+	// Christmas is built in: its name and date stay the same, and it's always a group.
+	if(occasion.builtin){
+		occasionForm.elements.name.readOnly = true;
+		monthInput.disabled = true;
+		dayInput.disabled = true;
+		document.querySelector(".who-choice").hidden = true;
+		document.querySelector("#builtin-note").hidden = false;
+	}
 
 	const who = isGroupOccasion(occasion) ? "group" : "person";
 	document.querySelector(`input[name="who"][value="${who}"]`).checked = true;
