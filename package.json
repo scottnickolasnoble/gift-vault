@@ -1,0 +1,17 @@
+{
+  "name": "gift-vault",
+  "version": "3.0.0",
+  "description": "Gift Idea Vault: remember what the people you love would like.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch --env-file=.env server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>Person · Gift Vault</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#F5F0E8">
+		<link rel="icon" type="image/png" href="icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+
+		<main>
+			<header>
+				<a class="cancel-link" id="cancel-link" href="index.html">Cancel</a>
+				<h1 class="add-person-label" id="person-label">New Person</h1>
+				<span class="header-spacer"></span>
+			</header>
+			<form class="add-person-form">
+			<div class="avatar-preview" id="avatar-preview">
+
+			</div>
+			<label class="field">
+				<span class="field-label">Name</span>
+				<input class="field-input" type="text" name="name" required maxlength="80">
+			</label>
+			<label class="field">
+				<span class="field-label">Relationship <span class="field-label-optional">(optional)</span></span>
+				<input class="field-input" type="text" name="relationship" placeholder="e.g. Sister, Friend, Coworker" maxlength="80">
+			</label>
+			<fieldset class="field chip-fieldset">
+				<legend class="field-label">Group</legend>
+				<div class="add-person-buttons">
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="family" checked>
+						<span>Family</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="friends">
+						<span>Friends</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="work">
+						<span>Work</span>
+					</label>
+					<label class="add-person-chip">
+						<input type="radio" name="group" value="other">
+						<span>Other</span>
+					</label>
+				</div>
+				<span class="birthday-label">Used to group people on the People list</span>
+			</fieldset>
+			<label class="field">
+				<span class="field-label">Birthday<span class="field-label-optional"> (optional)</span></span>
+				<input class="field-input" type="date" name="birthday">
+				<span class="birthday-label">Used for countdowns and reminders</span>
+			</label>
+			<fieldset class="details-group">
+				<legend>
+				Details
+				</legend>
+				<label class="field">
+					<span class="field-label">Sizes<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="text" name="sizes" maxlength="200">
+				</label>
+				<label class="field">
+					<span class="field-label">Favourite colour<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="text" name="favColour" maxlength="80">
+				</label>
+				<label class="field">
+					<span class="field-label">Loves<span class="field-label-optional"> (optional)</span></span>
+					<textarea class="field-input" rows="2" name="loves" maxlength="1000"></textarea>
+				</label>
+				<label class="field">
+					<span class="field-label">Avoid<span class="field-label-optional"> (optional)</span></span>
+					<textarea class="field-input" rows="2" name="avoid" maxlength="1000"></textarea>
+				</label>
+			</fieldset>
+			<button class="save-person" type="submit" id="save-button">Save person</button>
+			</form>
+			<button type="button" id="delete-button" hidden>Delete Person</button>
+			<dialog id="delete-dialog">
+				<h2>Delete this person?</h2>
+				<p>Their ideas will be deleted too, and they'll be taken out of every occasion. This can't be undone.</p>
+				<div class="delete-button-row">
+					<button type="button" id="keep-button">Keep</button>
+					<button type="button" id="confirm-delete">Delete</button>
+				</div>
+			</dialog>
+		</main>
+		<script src="js/api.js"></script>
+		<script src="js/dates.js"></script>
+		<script src="js/pwa.js"></script>
+		<script src="js/person-form.js"></script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>Bring your data over · Gift Vault</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#F5F0E8">
+		<link rel="icon" type="image/png" href="icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+
+		<main>
+			<header class="page-intro">
+				<span class="eyebrow">One-time step</span>
+				<h1 id="welcome-title">Bring your gift ideas over</h1>
+				<p id="welcome-lead">Used Gift Vault before you made an account? Move everything you saved into it, so it shows up on every device you sign in on.</p>
+			</header>
+			<ol class="steps" id="welcome-steps">
+				<li>On the phone or computer you used before, open the old Gift Vault app.</li>
+				<li>It will show a <strong>Download my vault</strong> button. Tap it to save a backup file.</li>
+				<li>Come back here and choose that file.</li>
+			</ol>
+			<dl class="move-counts" id="move-counts" hidden>
+				<div class="move-count"><dt>People</dt><dd id="count-people">0</dd></div>
+				<div class="move-count"><dt>Gift ideas</dt><dd id="count-ideas">0</dd></div>
+				<div class="move-count"><dt>Occasions</dt><dd id="count-occasions">0</dd></div>
+			</dl>
+			<div class="stack-buttons">
+				<button class="import-people" type="button" id="choose-button">Choose backup file</button>
+				<input type="file" id="backup-file" accept=".json,application/json" hidden>
+				<button class="save-person" type="button" id="move-button" hidden>Move it to my account</button>
+				<a class="save-person button-link" id="done-link" href="home.html" hidden>Go to my vault</a>
+				<a class="text-link" id="fresh-link" href="home.html">Start fresh instead</a>
+			</div>
+		</main>
+		<script src="js/api.js"></script>
+		<script src="js/dates.js"></script>
+		<script src="js/pwa.js"></script>
+		<script src="js/welcome.js"></script>
+	</body>
+</html>

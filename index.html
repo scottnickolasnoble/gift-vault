@@ -3,48 +3,105 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Gift Vault</title>
-		<link rel="stylesheet" href="css/styles.css">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-		<link rel="manifest" href="manifest.json">
+		<title>Gift Vault has moved</title>
+		<!--
+			This page is only for the OLD address (GitHub Pages).
+			The real app now runs on Render, from the public/ folder.
+			Your old people and ideas live in this browser's storage at the old
+			address, so this page lets you download them as a backup file,
+			then import that file in the new app.
+		-->
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/png" href="public/icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="public/icons/apple-touch-icon.png">
 		<meta name="theme-color" content="#F5F0E8">
-		<link rel="icon" type="image/png" href="icons/favicon-32.png">
-		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<style>
+			* { box-sizing: border-box; }
+			[hidden] { display: none !important; }
+			body { margin: 0; background: #F5F0E8; color: #231F1C; font-family: Manrope, system-ui, sans-serif; }
+			main { max-width: 480px; margin: 0 auto; padding: 48px 22px; display: flex; flex-direction: column; gap: 20px; }
+			img { border-radius: 20px; align-self: center; }
+			h1 { margin: 0; font-family: Fraunces, Georgia, serif; font-size: 30px; text-align: center; }
+			p { margin: 0; color: #5E5650; font-size: 15px; line-height: 1.5; text-align: center; }
+			dl { margin: 0; padding: 6px 18px; background: #FFFFFF; border: 1px solid #E4DCD0; border-radius: 18px; }
+			dl div { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #EFE8DE; }
+			dl div:last-child { border-bottom: none; }
+			dt { font-weight: 600; }
+			dd { margin: 0; font-family: Fraunces, Georgia, serif; font-size: 22px; font-weight: 600; }
+			.button { height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; }
+			.primary { background: #A8432A; color: #FFFFFF; border: none; }
+			.secondary { background: #FFFFFF; color: #231F1C; border: 1px solid #D6CCBE; }
+			.steps { margin: 0; padding: 16px 16px 16px 36px; background: #FFFFFF; border: 1px solid #E4DCD0; border-radius: 18px; display: flex; flex-direction: column; gap: 8px; line-height: 1.45; }
+		</style>
 	</head>
 	<body>
 		<main>
-			<header>
-				<h1>People</h1>
-				<a class="person-add" aria-label="Add person" href="person-form.html">+</a>
-			</header>
-			<label class="person-input-label">
-				<input class="person-input" type="search" placeholder="Search People" id="search-input">
-			</label>
-			<div class="segmented">
-				<button type="button" class="segment segment-active" data-view="all">Everyone</button>
-				<button type="button" class="segment" data-view="needs">Needs ideas</button>
-			</div>
-			<div id="people-list">
-				
-			</div>
-			<p class="hidden-empty-state" id="empty-state" hidden="true">No one here yet. Tap + to add your first person</p>
+			<img src="public/icons/icon-192.png" alt="" width="72" height="72">
+			<h1>Gift Vault has moved</h1>
+			<p>The new Gift Vault saves everything to your own account, so it's the same on your phone and laptop.</p>
+
+			<dl id="counts" hidden>
+				<div><dt>People</dt><dd id="count-people">0</dd></div>
+				<div><dt>Gift ideas</dt><dd id="count-ideas">0</dd></div>
+				<div><dt>Occasions</dt><dd id="count-occasions">0</dd></div>
+			</dl>
+
+			<ol class="steps" id="steps" hidden>
+				<li>Tap <strong>Download my vault</strong> to save your people and ideas from this device.</li>
+				<li>Open the new Gift Vault and create an account.</li>
+				<li>Choose the file you downloaded. Done.</li>
+			</ol>
+
+			<button class="button primary" type="button" id="download" hidden>Download my vault</button>
+			<a class="button secondary" id="open-new" href="#">Open the new Gift Vault</a>
+			<p id="nothing" hidden>There's nothing saved on this device, so you can go straight to the new app.</p>
 		</main>
-		<nav class="nav-bar">
-		
-		<a class="nav-links nav-links-active" href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house preview-icon"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a>
-		<a class="nav-links" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users preview-icon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>People</a>
-		<a class="nav-links" href="occasions.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar preview-icon"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Occasions</a>
-		<a class="nav-links" href="settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2 preview-icon"><path d="M14 17H5"/><path d="M19 7h-9"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>Settings</a>
-		</nav>
-		<script src="js/storage.js"></script>
-		<script src="js/dates.js"></script>
-		<script src="js/people.js"></script>
+		<script>
+			// ↓↓↓ Put your Render address here after you deploy (no slash at the end).
+			const NEW_APP_URL = "https://gift-vault.onrender.com";
+
+			document.querySelector("#open-new").href = NEW_APP_URL + "/signin.html?mode=signup";
+
+			function load(key) {
+				try {
+					return JSON.parse(localStorage.getItem(key)) || [];
+				} catch (error) {
+					return [];
+				}
+			}
+
+			const people = load("people");
+			const ideas = load("ideas");
+			const occasions = load("occasions");
+
+			if (people.length > 0 || ideas.length > 0) {
+				document.querySelector("#count-people").textContent = people.length;
+				document.querySelector("#count-ideas").textContent = ideas.length;
+				document.querySelector("#count-occasions").textContent = occasions.length;
+				document.querySelector("#counts").hidden = false;
+				document.querySelector("#steps").hidden = false;
+				document.querySelector("#download").hidden = false;
+			} else {
+				document.querySelector("#nothing").hidden = false;
+			}
+
+			document.querySelector("#download").addEventListener("click", function() {
+				const now = new Date();
+				const today = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+				const backup = { version: 2, exportedOn: today, people: people, ideas: ideas, occasions: occasions };
+				const file = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+				const url = URL.createObjectURL(file);
+				const link = document.createElement("a");
+				link.href = url;
+				link.download = "gift-vault-backup-" + today + ".json";
+				document.body.appendChild(link);
+				link.click();
+				link.remove();
+				setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+			});
+
+			// Note: this page doesn't register a service worker. The browser updates the old
+			// app's one to the new sw.js by itself, which then turns itself off.
+		</script>
 	</body>
-		
 </html>

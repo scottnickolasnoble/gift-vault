@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>Occasion · Gift Vault</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#F5F0E8">
+		<link rel="icon" type="image/png" href="icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+
+		<main>
+			<header>
+				<a class="cancel-link" id="cancel-link" href="occasions.html">Cancel</a>
+				<h1 class="add-person-label" id="occasion-label">New Occasion</h1>
+				<span class="header-spacer"></span>
+			</header>
+
+			<form class="occasion-form">
+				<label class="field">
+					<span class="field-label">What's the occasion?</span>
+					<input class="field-input" type="text" name="name" required maxlength="80" placeholder="e.g. Christmas, Secret Santa">
+				</label>
+
+				<fieldset class="field chip-fieldset">
+					<legend class="field-label">Date</legend>
+					<div class="month-day">
+						<select class="field-input" id="month-input" name="month" aria-label="Month">
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">August</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12" selected>December</option>
+						</select>
+						<select class="field-input" id="day-input" name="day" aria-label="Day">
+							<!-- filled with 1 to 31 by JavaScript -->
+						</select>
+					</div>
+					<span class="birthday-label">Repeats every year on this date</span>
+				</fieldset>
+
+				<fieldset class="field chip-fieldset">
+					<legend class="field-label">Who's it for?</legend>
+					<div class="who-choice">
+						<label class="who-option">
+							<input type="radio" name="who" value="person" checked>
+							<span>One person</span>
+						</label>
+						<label class="who-option">
+							<input type="radio" name="who" value="group">
+							<span>A group</span>
+						</label>
+					</div>
+
+					<select class="field-input" id="person-input" name="personId" aria-label="Person"></select>
+
+					<div class="people-checklist" id="people-checklist" hidden>
+						<span class="checklist-count" id="checklist-count">0 people selected</span>
+						<div id="checklist-groups"></div>
+					</div>
+				</fieldset>
+
+				<label class="field">
+					<span class="field-label">Budget <span class="field-label-optional">(optional)</span></span>
+					<input class="field-input" type="number" name="budget" min="0" step="0.01" inputmode="decimal" placeholder="$">
+				</label>
+
+				<button class="save-person" type="submit" id="save-occasion">Save occasion</button>
+			</form>
+		</main>
+		<script src="js/api.js"></script>
+		<script src="js/dates.js"></script>
+		<script src="js/money.js"></script>
+		<script src="js/entries.js"></script>
+		<script src="js/pwa.js"></script>
+		<script src="js/occasion-form.js"></script>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>Idea · Gift Vault</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#F5F0E8">
+		<link rel="icon" type="image/png" href="icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+
+		<main>
+			<header>
+				<a class="cancel-link" id="cancel-link" href="index.html">Cancel</a>
+				<h1 class="add-person-label" id="idea-form-title">New Idea</h1>
+				<span class="header-spacer"></span>
+			</header>
+			<form class="add-person-form">
+			<label class="field">
+				<span class="field-label">What's the gift?</span>
+				<input class="field-input" type="text" name="name" required maxlength="200">
+			</label>
+			<label class="field">
+				<span class="field-label">Who's it for?</span>
+				<select class="field-input" id="person-select" name="personId"></select>
+			</label>
+			<fieldset class="field chip-fieldset">
+				<legend class="field-label">Which occasion?</legend>
+				<div class="add-person-buttons occasion-chips" id="occasion-chips"></div>
+				<span class="birthday-label">Tagged ideas show up on that occasion's page and count toward its budget.</span>
+			</fieldset>
+			<label class="field">
+				<span class="field-label">How did it come up?<span class="field-label-optional"> (optional)</span></span>
+				<textarea rows="3" class="field-input" name="note" maxlength="2000"></textarea>
+			</label>
+			<div class="field-row">
+				<label class="field">
+					<span class="field-label">Date heard<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="date" name="heardOn">
+				</label>
+				<label class="field">
+					<span class="field-label">Est. price<span class="field-label-optional"> (optional)</span></span>
+					<input class="field-input" type="number" min="0" step="0.01" name="price" inputmode="decimal">
+				</label>
+			</div>
+			<label class="field">
+				<span class="field-label">Link<span class="field-label-optional"> (optional)</span></span>
+				<input class="field-input" type="url" name="link" placeholder="https://...." maxlength="2000">
+			</label>
+			<button class="save-person" type="submit" id="save-button">Save Idea</button>
+			</form>
+			<button type="button" id="delete-button" hidden>Delete Idea</button>
+			<dialog id="delete-dialog">
+				<h2>Delete this idea?</h2>
+				<p>This can't be undone.</p>
+				<div class="delete-button-row">
+					<button type="button" id="keep-button">Keep</button>
+					<button type="button" id="confirm-delete">Delete</button>
+				</div>
+			</dialog>
+		</main>
+		<script src="js/api.js"></script>
+		<script src="js/dates.js"></script>
+		<script src="js/pwa.js"></script>
+		<script src="js/idea-form.js"></script>
+	</body>
+</html>

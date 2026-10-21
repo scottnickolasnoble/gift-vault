@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>Sign in · Gift Vault</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="manifest" href="manifest.json">
+		<meta name="theme-color" content="#F5F0E8">
+		<link rel="icon" type="image/png" href="icons/favicon-32.png">
+		<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="Gift Vault">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+
+		<main class="auth-page">
+			<header class="auth-header">
+				<img class="auth-logo" src="icons/icon-192.png" alt="" width="72" height="72">
+				<h1>Gift Vault</h1>
+				<p id="auth-subtitle">Welcome back. Sign in to see your people and plans.</p>
+			</header>
+			<div class="segmented auth-tabs">
+				<button type="button" class="segment segment-active" data-mode="signin" aria-pressed="true">Sign in</button>
+				<button type="button" class="segment" data-mode="signup" aria-pressed="false">Create account</button>
+			</div>
+			<form class="add-person-form" id="auth-form">
+				<label class="field" id="name-field" hidden>
+					<span class="field-label">Your name</span>
+					<input class="field-input" type="text" name="name" autocomplete="name" maxlength="80">
+				</label>
+				<label class="field">
+					<span class="field-label">Email</span>
+					<input class="field-input" type="email" name="email" autocomplete="email" required>
+				</label>
+				<label class="field">
+					<span class="field-label">Password</span>
+					<input class="field-input" type="password" name="password" autocomplete="current-password" required minlength="8">
+					<span class="birthday-label" id="password-hint" hidden>At least 8 characters.</span>
+				</label>
+				<p class="form-error" id="auth-error" role="alert" hidden></p>
+				<button class="save-person" type="submit" id="auth-submit">Sign in</button>
+			</form>
+			<p class="auth-note">Your people, ideas and occasions are saved to your account, so they're the same on your phone and your laptop.</p>
+		</main>
+		<script src="js/api.js"></script>
+		<script src="js/pwa.js"></script>
+		<script src="js/signin.js"></script>
+	</body>
+</html>
